@@ -12,7 +12,7 @@ root.render(
     clientId="YOUR_CLIENTID"
     authorizationParams={{
       redirect_uri: window.location.origin,
-      audience: "YOUR_AUD", // optional (needed for .NET API)
+      audience: "YOUR_AUDIENCE", // optional (needed for .NET API)
     }}
   >
     <App />

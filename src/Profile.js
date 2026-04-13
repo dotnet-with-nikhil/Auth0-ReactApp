@@ -16,7 +16,7 @@ const Profile = () => {
   const callApi = async () => {
     try {
       const token = await getAccessTokenSilently({
-        audience: "YOUR_AUD",
+        audience: "YOUR_AUDIENCE",
         scope: "read:messages",
       });
 
