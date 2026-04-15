@@ -8,11 +8,11 @@ import { Auth0Provider } from "@auth0/auth0-react";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Auth0Provider
-    domain="YOUR_DOMAIN"
-    clientId="YOUR_CLIENTID"
+     domain="YOUR_DOMAIN"
+	 clientId="YOUR_CLIENTID"
     authorizationParams={{
       redirect_uri: window.location.origin,
-      audience: "YOUR_AUDIENCE", // optional (needed for .NET API)
+      audience: "https://timesheet-api", // optional (needed for .NET API)
     }}
   >
     <App />

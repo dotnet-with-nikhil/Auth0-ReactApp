@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
@@ -11,16 +11,17 @@ const Profile = () => {
     loginWithRedirect,
     logout,
   } = useAuth0();
-
+const [apiLoading, setApiLoading] = useState(false);
   // Call secured .NET API
   const callApi = async () => {
+    setApiLoading(true);
     try {
       const token = await getAccessTokenSilently({
-        audience: "YOUR_AUDIENCE",
+        audience: "https://timesheet-api",
         scope: "read:messages",
       });
-
-      const response = await fetch("https://localhost:5001/api/secure", {
+      
+      const response = await fetch("https://localhost:7108/api/timesheet", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,8 +32,9 @@ const Profile = () => {
       }
 
       const data = await response.json();
-      console.log("API Response:", data);
-      alert(JSON.stringify(data, null, 2));
+      console.log("API Response:", data.message);
+      alert(data.message);
+      setApiLoading(false);
     } catch (error) {
       console.error("Error calling API:", error);
     }
@@ -48,24 +50,10 @@ const Profile = () => {
         <button onClick={() => loginWithRedirect()}>Login</button>
       ) : (
         <div>
-          <h2>User Profile</h2>
-
-          <img
-            src={user.picture}
-            alt={user.name}
-            style={{ width: "100px", borderRadius: "50%" }}
-          />
-
-          <h3>{user.name}</h3>
-          <p>{user.email}</p>
-
-          <pre style={{ textAlign: "left" }}>
-            {JSON.stringify(user, null, 2)}
-          </pre>
-
-          <br />
-
-          <button onClick={callApi}>Call Secure API</button>
+         
+          <button onClick={callApi} disabled={apiLoading}>
+            {apiLoading ? "Loading..." : "Call API"}
+          </button>
 
           <br /><br />
 

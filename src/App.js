@@ -1,4 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
+import Profile from "./Profile";
 import "./App.css";
 
 function App() {
@@ -85,6 +86,7 @@ function App() {
               <p>Manage and track your tasks</p>
             </div>
           </div>
+          <Profile />
         </div>
       )}
     </div>
